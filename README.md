@@ -1,48 +1,76 @@
-## ACTIVITY RECOGNITION USING CNN, LSTM and PYTORCH
+📘 ACTIVITY RECOGNITION USING CNN, LSTM & PYTORCH
 
-This project implements a video action recognition model using a CNN + LSTM hybrid architecture in PyTorch.
-Each frame is passed through MobileNetV2 to extract per-frame features, and then an LSTM learns temporal patterns across frames.
-The final classifier predicts the action class for each video.
+This project implements a video action recognition system using a hybrid CNN + LSTM architecture in PyTorch.
 
-# This repository contains:
-1. model.py → CNN-LSTM action recognition model
-2. dataset.py → Video frame loading + preprocessing
-3. train.py → Training & validation pipeline
-4. data/ → Folder containing HMDB51-style split dataset
---
-# Model Architecture 
+Each video frame is passed through a MobileNetV2 CNN to extract features.
 
-1. CNN Feature Extractor
-Uses MobileNetV2 as a backbone
-Pretrained weights (optional)
-Outputs a 1280-dim feature vector per frame
-Can freeze or finetune CNN layers
+A LSTM processes the temporal sequence of these features.
 
-2. LSTM Sequence Model
-Takes feature sequences shaped (batch, time, feature_dim)
-Options:
-LSTM hidden size
-1 or more layers
-Bidirectional support
-Learns temporal dependencies across video frames
+A classification head predicts the action class for each video clip.
 
-3. Classifier
-Fully connected layers
-Dropout regularization
+📁 Repository Structure
+.
+├── model.py       # CNN + LSTM action recognition model
+├── dataset.py     # Video frame dataset loader and preprocessing
+├── train.py       # Training + validation pipeline
+└── data/          # HMDB51-style dataset split (train/val)
+
+🧠 Model Architecture
+1️⃣ CNN Feature Extractor (MobileNetV2)
+
+Pretrained on ImageNet (optional)
+
+Extracts a 1280-dimensional feature vector per frame
+
+Backbone can be frozen or fine-tuned
+
+2️⃣ LSTM Sequence Model
+
+Input shape: (batch, time_steps, feature_dim)
+
+Adjustable:
+
+Hidden size
+
+Number of layers
+
+Bidirectional or unidirectional
+
+Learns temporal patterns across video frames
+
+3️⃣ Classification Head
+
+Fully-connected layers
+
+Dropout for regularization
+
 Outputs logits for num_classes actions
 
-# Dataset Structure 
-Dataset should be organized in an HMDB51-style format:
-data/
- └── HMDB51_split/
-      ├── train/
-      │    ├── jump/
-      │    ├── walk/
-      │    ├── run/
-      │    └── sit/
-      └── val/
-           ├── jump/
-           ├── walk/
-           ├── run/
-           └── sit/
+📦 Dataset Structure
 
+Dataset must follow an HMDB51-like folder structure:
+
+data/
+└── HMDB51_split/
+    ├── train/
+    │   ├── jump/
+    │   ├── walk/
+    │   ├── run/
+    │   └── sit/
+    └── val/
+        ├── jump/
+        ├── walk/
+        ├── run/
+        └── sit/
+
+
+Each class folder contains multiple videos, and each video folder contains extracted frames:
+
+walk/
+   video_01/
+       frame_0001.jpg
+       frame_0002.jpg
+       ...
+   video_02/
+       frame_0001.jpg
+       ...
