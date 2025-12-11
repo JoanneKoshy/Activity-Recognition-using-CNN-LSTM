@@ -1,9 +1,5 @@
-## Activity Recogonition using CNN, LSTM and PyTorch 
+## ACTIVITY RECOGNITION USING CNN, LSTM and PYTORCH
 
-This project implements a video action recognition model using a CNN + LSTM hybrid architecture in PyTorch.
-Each frame is passed through MobileNetV2 to extract per-frame features, and then an LSTM learns temporal patterns across frames.
-The final classifier predicts the action class for each video.
---
 # This repository contains:
 1. model.py → CNN-LSTM action recognition model
 2. dataset.py → Video frame loading + preprocessing
